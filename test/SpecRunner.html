@@ -11,16 +11,17 @@
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine-html.js"></script>
 
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/1.0.7/require.min.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
   <script type="text/javascript">
   
     require.config({
-    	baseUrl: '../'
+    	baseUrl: '../',
+    	paths: {
+    		'jquery' : 'http://code.jquery.com/jquery.min'
+    	}
     });
     
-    require(['../test/spec/klassy.spec.js'], function() {
-		$(function() {
+    require(['jquery', '../test/spec/klassy.spec.js'], function($) {
 		  var jasmineEnv = jasmine.getEnv();
 		  jasmineEnv.updateInterval = 1000;
 	
@@ -31,21 +32,10 @@
 		  jasmineEnv.specFilter = function(spec) {
 			return htmlReporter.specFilter(spec);
 		  };
-	
-		  var currentWindowOnload = window.onload;
-	
-		  window.onload = function() {
-			if (currentWindowOnload) {
-			  currentWindowOnload();
-			}
-			execJasmine();
-		  };
-	
-		  function execJasmine() {
-			jasmineEnv.execute();
-		  }
-	
-		});
+		  
+		  $(function(){
+		  	jasmineEnv.execute()
+		  });
     });
   </script>
 
