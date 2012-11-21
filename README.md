@@ -1,5 +1,3 @@
-All your base are belong to us!!!!
-
 #KlassyJS 
 
 KlassyJS is a super simple library that implements "classical inheritance" for JS. 
